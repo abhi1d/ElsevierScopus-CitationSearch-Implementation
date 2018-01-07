@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ElsevierScopus CitationSearch Implementation">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jsoup-1.11.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
