@@ -1,9 +1,9 @@
 
 
-import java.io.IOException;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 public class Citation_Count {
 	public int citation_count = 0;

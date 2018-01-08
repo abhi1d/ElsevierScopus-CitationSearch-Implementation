@@ -115,6 +115,7 @@ public class Extracting_Paper_ReferenceData {
             }
         }catch (Exception e)
         {
+            e.printStackTrace();
             System.out.println("Error During the Extraction of reference list");
         }
 

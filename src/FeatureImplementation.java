@@ -9,30 +9,19 @@
  * Due Part :
  * 1. last Extraction of header with the value of the count of reference
 */
-import java.io.File;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.HashMap;
-import java.util.*;
-import java.lang.*;
-import java.text.ParseException; 
-import java.util.ArrayList; 
-import java.util.Collections; 
-import java.util.Comparator; 
-import java.util.HashMap; 
-import java.util.LinkedHashMap; 
-import java.util.List; 
-import java.util.Map.Entry; 
-import java.util.Set; 
-import java.util.TreeMap;
 
 
 
@@ -43,6 +32,7 @@ public class FeatureImplementation
    public static String tag_name_head_content = null;
    public static File inputFile_div;
    private static final String REGEX = "ref";
+
 
    //function for calculating the last heading references
    public static void last_heading(String heading,File inputFile, String fileName)
@@ -280,108 +270,9 @@ public class FeatureImplementation
 
                   try{
             
-                        File inputFile = new File("/home/abhi/eclipse-oxygen/INS_CleanUpdate/XML/INS_ACC/" + fileName);
-                        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                        Document doc = dBuilder.parse(inputFile);
-                        doc.getDocumentElement().normalize();
-                        int flag_of_bib_str = 0;
-
-                        //hash mapping
-                        Map<String,Integer> mapping = new HashMap<>();
-                        String key = null;
-                        int value;
-                      
-                        NodeList nodeList_bib_str = doc.getElementsByTagName("biblStruct");
-                        for(int i = 1 ; i < nodeList_bib_str.getLength() ; i++)
-                            {
-                                 Node node_bib_str = nodeList_bib_str.item(i);
-
-                                  if (node_bib_str.getNodeType() == Node.ELEMENT_NODE)
-                                    {  
-                                         Element el_bib_str = (Element) node_bib_str;
-
-                                        //node list for getting the title.
-                                        NodeList nodeList_title = el_bib_str.getElementsByTagName("title");
-
-                                        for(int j = 0 ; j < nodeList_title.getLength() ; j++)
-                                              {
-                                                   Node node_title = nodeList_title.item(j);
-                                                   if(node_title.getNodeType() == Node.ELEMENT_NODE)
-                                                    {
-                                                        Element el_title = (Element) node_title;
-                                                        String title_type = el_title.getAttribute("type");
-                                                        String title_name = null;
-                                                        if(title_type.contains("main"))
-                                                          {
-                                                              title_name = el_bib_str.getElementsByTagName("title").item(0).getTextContent();
-                                                               //System.out.println(title_name);
-                                                              key = title_name;
-                                                              flag_of_bib_str = 1;
-                                                               //break;
-                                                           } 
-                                                    }
-                                          }
-                                          if(flag_of_bib_str == 1)
-                                                 {
-                                                    //extracting the date tag
-                                                      NodeList nodeList_date = el_bib_str.getElementsByTagName("date");
-                                                      //iterate the nodelist of date tags
-                                                      for(int k = 0 ; k < nodeList_date.getLength(); k++)
-                                                        { 
-                                                           Node node_date = nodeList_date.item(k);
- 
-                                                          if(node_date.getNodeType() == Node.ELEMENT_NODE)
-                                                                  {
-                                                                      Element el_date = (Element) node_date;
-                                                                      // here date string maybe contains the date and year or maybe year only
-                                                                      // so we will split the string by '-'
-                                                                      String date = el_date.getAttribute("when"); 
-                                                                      // now spliting the array
-                                                                      // if it contains the month
-                                                                      // otherwise we won't split the array
-                                                                      int flag_for_mainTitle = 1;if(date.contains("-")) // date has year as well as month of publishing
-                                                                       {
-                                                                            String [] date_array = date.split("-");
-                                                                            String date1 = date_array[0];
-                                                                            String date2 = date_array[1];
-                                                                            //System.out.println(date1 + " : " + date2);
-                                                                            String year = null;
-                                                                            String month = null;
-                                          
-                                                                            if(date1.length() == 4 )
-                                                                              {
-                                                                                  year = date1;
-                                                                                  month = date2;
-                                                                                }     
-                                                                            else
-                                                                                 {
-                                                                                   year = date2;
-                                                                                   month = date1;
-                                                                                  }
-                                                                           value = Integer.parseInt(year);
-                                                                          }
-                                                                      else // date string has only the year of publishing
-                                                                           {
-                                                                           value = Integer.parseInt(date);
-                                                                           }    
-                                       
-                                       
-                                                                      mapping.put(key,value);
-                                                                       //System.out.println(key);
-                                                                        //System.out.println("date : "+mapping.get(key));
-                                                                        flag_of_bib_str = 0;
-                                                                         key = null;
-                                                                        value = 0;
-                                                                   }
-                                                         }//end of the loop for date tags
-
-                                                   } 
-                            
-                             
-                                    }
-
-                              }
+                       Extracting_Paper_ReferenceData obj_extracting_references_map = new Extracting_Paper_ReferenceData();
+                       Map<String, Integer> mapping;
+                       mapping = obj_extracting_references_map.Get_Reference_Mapping_List("");
                        // extracting the main title and author for 
                         //the purpose of extracting the year
                         
@@ -585,13 +476,14 @@ public class FeatureImplementation
                           
                            
                          }
-                     
-                       double feature1 = (counter_recent_year * 1.0)/result_by_searching;
-                       System.out.println("\n----------------------\n******************feature one is  :  " + feature1 + "***********************\n-------------------------------\n------------------------------------------" );
+
+
+                       //double feature1 = (counter_recent_year * 1.0)/result_by_searching;
+                       //System.out.println("\n----------------------\n******************feature one is  :  " + feature1 + "***********************\n-------------------------------\n------------------------------------------" );
                       
-                       double feature2 = (number_of_citation *1.0 )/result_by_searching;
+                       //double feature2 = (number_of_citation *1.0 )/result_by_searching;
                        
-                       System.out.println("\n----------------------\n******************feature two is  :  " + feature2 + "***********************\n-------------------------------\n------------------------------------------" );
+                       //System.out.println("\n----------------------\n******************feature two is  :  " + feature2 + "***********************\n-------------------------------\n------------------------------------------" );
 
                 } catch(Exception e) {
                  System.out.println("in the mapping section");
