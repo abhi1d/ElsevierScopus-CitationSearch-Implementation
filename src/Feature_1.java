@@ -6,14 +6,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
-public class Feature_2 {
-    public static int threshold_value = 7;
+public class Feature_1 {
+
     public static void main(String args[])
     {
         String title = "Fault-tolerant+edge-bipancyclicity+of+faulty+hypercubes+under+the+conditional-fault+model";
-         String apiKey = "288b2ca0b06c75c02c0ec188e6226d3e";
+        String apiKey = "288b2ca0b06c75c02c0ec188e6226d3e";
         totalResultsAfterSearching obj_searching_result = new totalResultsAfterSearching();
         int total_related_search = obj_searching_result.totalResult(title);
 
@@ -46,18 +47,22 @@ public class Feature_2 {
             JSONArray obj_array = obj_JSONObject_searchResults.getJSONArray("entry");
 
             int i = 0;
-            int p = 0;
-            ArrayList<String> pioneering_work_paper = new ArrayList<>();
+            int n = 0;
+            ArrayList<String> related_papers = new ArrayList<>();
+
             while(i<total_related_search)
             {
                 JSONObject obj_counter = obj_array.getJSONObject(i);
-                if( Integer.parseInt(obj_counter.getString("citedby-count")) >= threshold_value)
-                {
-                    String paper_title = obj_counter.getString("dc:title");
-                    pioneering_work_paper.add(paper_title);
-                    System.out.println("value of   " + i + " is  :   citedby-count  : " +obj_counter.getString("citedby-count")) ;
-                    p++;
-                }
+                String year_paper = obj_counter.getString("prism:coverDate");
+                int year_of_paper = Integer.parseInt(year_paper.substring(0,4));
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+               // if((year_of_paper+5) >= year)
+                //{
+                    String paper_search_counter  = obj_counter.getString("dc:title");
+                    related_papers.add(paper_search_counter);
+                    n++;
+              //  }
+
                 i++;
             }
 
@@ -65,19 +70,19 @@ public class Feature_2 {
             // here we are passing the null string because for the testing purpose it already associated in Extracting_paper_reference Class
             Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List("");
 
-            int q = 0;
-            for(String s : pioneering_work_paper)
+            int m = 0;
+            for(String s : related_papers)
             {
                 for (Map.Entry<String, Integer> entry : mapping.entrySet())
                 {
 
-                   if(s.equals(entry.getKey()))
-                   {
-                       q++;
-                       System.out.println(s+"\n"+q);
+                    if(s.equals(entry.getKey()))
+                    {
+                        m++;
+                        System.out.println(s+"\n"+m);
 
 
-                   }
+                    }
                 }
             }
 
