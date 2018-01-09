@@ -16,34 +16,35 @@ public class Extracting_Main_TitleOfPaper {
         // extracting main title of the paper
         String main_title_of_paper  = null;
 
-        File inputFile_title = new File(pathname);
-        DocumentBuilderFactory dbFactory_title = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder_title = dbFactory_title.newDocumentBuilder();
-        Document doc_title = dBuilder_title.parse(inputFile_title);
-        doc_title.getDocumentElement().normalize();
-        NodeList nList_title = doc_title.getElementsByTagName("titleStmt");
+        try {
+            File inputFile_title = new File(pathname);
 
-        for(int i = 0 ; i < nList_title.getLength(); i++)
-        {
-            Node node_title = nList_title.item(i);
+            DocumentBuilderFactory dbFactory_title = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder_title = dbFactory_title.newDocumentBuilder();
+            Document doc_title = dBuilder_title.parse(inputFile_title);
+            doc_title.getDocumentElement().normalize();
+            NodeList nList_title = doc_title.getElementsByTagName("titleStmt");
 
-            if (node_title.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element el_title = (Element) node_title;
-                String main_title = (String)el_title.getElementsByTagName("title").item(0).getTextContent();
-                System.out.println("-------------main title---------------------\n"+main_title +"\n------end---------------");
-                //spliting the array with single-space and storing into the array
-                String [] MAIN_TITLE_ARRAY = main_title.split(" ");
-                //now concat with +
-                main_title_of_paper = String.join("+",MAIN_TITLE_ARRAY);
-                //System.out.println("\n-------------main title---------------------\n"+main_title_of_paper +"\n------end---------------");
+            for (int i = 0; i < nList_title.getLength(); i++) {
+                Node node_title = nList_title.item(i);
 
-                break;
+                if (node_title.getNodeType() == Node.ELEMENT_NODE) {
+                    Element el_title = (Element) node_title;
+                    String main_title = (String) el_title.getElementsByTagName("title").item(0).getTextContent();
+                    System.out.println("-------------main title---------------------\n" + main_title + "\n------end---------------");
+                    //spliting the array with single-space and storing into the array
+                    String[] MAIN_TITLE_ARRAY = main_title.split(" ");
+                    //now concat with +
+                    main_title_of_paper = String.join("+", MAIN_TITLE_ARRAY);
+                    //System.out.println("\n-------------main title---------------------\n"+main_title_of_paper +"\n------end---------------");
+
+                    break;
+                }
             }
+            return main_title_of_paper;
+        } catch (Exception e)
+        {
+            return null;
         }
-
-
-
-        return main_title_of_paper;
     }
 }
