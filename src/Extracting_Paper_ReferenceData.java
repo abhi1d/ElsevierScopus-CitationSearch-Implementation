@@ -113,6 +113,14 @@ public class Extracting_Paper_ReferenceData {
                 }
 
             }
+             System.out.println("Reference Data in Target Paper Section :\n\n");
+            for (Map.Entry<String, Integer> entry : mapping.entrySet())
+            {
+
+                System.out.println( entry.getValue()+" : "+entry.getKey());
+
+            }
+
         }catch (Exception e)
         {
             e.printStackTrace();

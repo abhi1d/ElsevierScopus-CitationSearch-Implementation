@@ -12,8 +12,9 @@ public class totalResultsAfterSearching {
 	int resultBySearching = 0;
 	public int totalResult(String title) 
 	{
-		String url = "http://api.elsevier.com/content/search/scopus?query=" + title + "&apiKey=" + apiKey + "&httpAccept=application/json";
+
 	   try {
+		   String url = "http://api.elsevier.com/content/search/scopus?query=" + title + "&apiKey=" + apiKey + "&httpAccept=application/json";
 		   URL obj  = new URL(url);
 	  
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -43,12 +44,14 @@ public class totalResultsAfterSearching {
 	    System.out.println("SEARCH      :::::::::::::::::::::" + result +":::::::::::::::::::::::::::::RESULT\n");
 		
 		resultBySearching = Integer.parseInt(result);
+		return resultBySearching;
 	   }
 	   catch(Exception e)
 	   {
 		   System.out.println("Problem occured during total searching result extraction-1");
-		   e.printStackTrace();
+		   return 0;
+
 	   }
-	   return resultBySearching;
+
 	}
 }

@@ -1,17 +1,16 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Retrieving_Intro_Ref_List {
     public static int total_no_ref = 0;
@@ -19,8 +18,8 @@ public class Retrieving_Intro_Ref_List {
     public static String tag_name_head_content = null;
     public static File inputFile_div;
     private static final String REGEX = "ref";
-    public ArrayList<String> Get_Ref_From_Intro() throws ParserConfigurationException, SAXException, IOException {
-        File inputFile = new File("/home/abhi/eclipse-oxygen/INS_CleanUpdate/XML/INS_ACC/INS-D-13-1234[1]_cleaned.pdf.xml");
+    public ArrayList<String> Get_Ref_From_Intro(String pathname) throws ParserConfigurationException, SAXException, IOException {
+        File inputFile = new File(pathname);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc_div = dBuilder.parse(inputFile);
@@ -39,7 +38,7 @@ public class Retrieving_Intro_Ref_List {
         int flag2 = 1;
         int flag3 = 1; //this flag variable for getting the exact number of references in the introduction section.
         int last_co_ref = 0;
-        ArrayList<String> al = new ArrayList<String>();
+        ArrayList<String> al = new ArrayList<>();
         for (int temp = 0; temp < nList_div.getLength(); temp++) {
 
             Node nNode = nList_div.item(temp);
@@ -146,10 +145,8 @@ public class Retrieving_Intro_Ref_List {
                     }
 
                 }//end of the loop of couting the elements in the one head
-                if (flag1 == 1) {
+                if (flag1 != 1) {
 
-                    continue;
-                } else {
                     break;
                 }
 
@@ -158,13 +155,48 @@ public class Retrieving_Intro_Ref_List {
 
 
         }//end of the loop which iterate the div
+
+
+
+
+
         ArrayList<String> intro_ref_string_list = new ArrayList<String>();
         for (String s : al) {
             s = s.replace("[", "");
             s = s.replace("]", "");
-            intro_ref_string_list.add(s.trim());
+
+            // sometimes we will get range of references
+            if(s.contains("-"))
+            {
+                String [] range =  s.split("-");
+
+
+                System.out.println("range like references  : ");
+                for(String x : range)
+                {
+                    System.out.println(x);
+                }
+                System.out.println("end of range");
+                try {
+                    int num1 = Integer.parseInt(range[0].trim());
+
+                    int num2 = Integer.parseInt(range[1].trim());
+
+                    while (num1 <= num2) {
+
+                        intro_ref_string_list.add(Integer.toString(num1).trim());
+                        num1++;
+                    }
+                }catch (Exception e){System.out.println("no range found");}
+            }
+            else {
+                intro_ref_string_list.add(s.trim());
+            }
+
+
 
         }
+
 
         /*for (String s : intro_ref_string_list) {
             System.out.println(s);
