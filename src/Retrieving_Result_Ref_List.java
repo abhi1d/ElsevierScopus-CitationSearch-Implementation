@@ -24,9 +24,9 @@ public class Retrieving_Result_Ref_List {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc_div = dBuilder.parse(inputFile);
         doc_div.getDocumentElement().normalize();
-        System.out.println("Root element :" + doc_div.getDocumentElement().getNodeName());
 
-        System.out.println("\t\tFeature 3 extracting...........\n");
+
+
         NodeList nList_div = doc_div.getElementsByTagName("div");
         String start_head = "1";
         int counting_head = 1;
@@ -52,14 +52,14 @@ public class Retrieving_Result_Ref_List {
                     tag_name_head_content = eElement.getElementsByTagName("head").item(0).getTextContent();
                 } catch (Exception e) {
                 }
-                //System.out.println("\t heading : " + tag_name_head_content+"\n");
+
                 NodeList nList_head = eElement.getElementsByTagName("head");
                 NodeList nList_ref = eElement.getElementsByTagName("ref");
 
 
                 number_of_ref = number_of_ref + nList_ref.getLength();
                 last_co_ref = nList_ref.getLength();
-                //System.out.println("co ref : "+last_co_ref);
+
                 total_no_ref = total_no_ref + nList_ref.getLength();
 
                 for (int i = 0; i < total_no_ref; i++) {
@@ -77,18 +77,12 @@ public class Retrieving_Result_Ref_List {
                                     al.add(ref_string_array[j]);
                                 }
 
-                            System.out.println(" ref   :   " + ref_name);
 
-                        }catch (Exception e){System.out.println();}
+
+                        }catch (Exception e){System.out.print("");}
                     }
 
                 }
-
-                    /* if(flag1 == 1)
-                     {
-                       number_of_ref = number_of_ref + nList_ref.getLength();
-                       flag1 = 0;
-                     }*/
                 //System.out.println("testing ref : "+number_of_ref + "\n");
                 //for checking the type of the heading
                 //It is helping us to recognize the difference between the heading and sub-headings
@@ -117,30 +111,11 @@ public class Retrieving_Result_Ref_List {
                             if(flag2 == 1)
                             {
                                 flag2 = 0;
-                                System.out.println("heading : " + tag_name_head_content);
-                                fw.write("heading   :    " + tag_name_head_content + "\n");
-                                fw.close();
+
                             }
                             else
                             {
-                                //we are removing the last_co_ref from the number_of_ref
-                                //becoz last_co_ref is the ref of last head
-                                //so we are removing from the current references
-                                //and adding into the next immediate reference
-                                fw.write("ref   :   " +  (number_of_ref - last_co_ref) + "\n" );
-                                System.out.println("ref : " + (number_of_ref - last_co_ref) + "\n");
-                                //System.out.println("total_no_ref " +total_no_ref);
-                                Double feature = ((number_of_ref - last_co_ref) * (1.0) / numberOfAuthers);
-                                fw.write("feature   :   " + feature);
-                                System.out.println("feature :  " + feature  + "\n");
-                                fw.write("-------------------------------------------------" + "\n");
-                                System.out.println("heading : " + tag_name_head_content);
-                                fw.write("heading   :    " + tag_name_head_content + "\n");
-                                //writing into the file
 
-
-
-                                fw.close();
 
                                 number_of_ref = last_co_ref;
                             }
@@ -179,16 +154,12 @@ public class Retrieving_Result_Ref_List {
                         intro_ref_string_list.add(Integer.toString(num1).trim());
                         num1++;
                     }
-                }catch (Exception e){System.out.println("no range found");}
+                }catch (Exception e){System.out.print("");}
             }
             else {
                 intro_ref_string_list.add(s.trim());
             }
 
-        }
-
-        for (String s : intro_ref_string_list) {
-            System.out.println(s);
         }
 
        return intro_ref_string_list;

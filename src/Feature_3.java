@@ -18,6 +18,10 @@ public class Feature_3
         ArrayList<String> ref_list_from_intro = new ArrayList<>();
         try {
             ref_list_from_intro =  obj_intro_ref.Get_Ref_From_Intro(pathname);
+            Set<String> hs1 = new HashSet<>();
+            hs1.addAll(ref_list_from_intro);
+            ref_list_from_intro.clear();
+            ref_list_from_intro.addAll(hs1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,6 +33,10 @@ public class Feature_3
         Retrieving_Result_Ref_List obj_result_ref = new Retrieving_Result_Ref_List();
         try{
             ref_list_from_result =  obj_result_ref.Get_Ref_From_Result(pathname);
+            Set<String> hs1 = new HashSet<>();
+            hs1.addAll(ref_list_from_result);
+            ref_list_from_result.clear();
+            ref_list_from_result.addAll(hs1);
         }catch (Exception e)
         {
             e.printStackTrace();
