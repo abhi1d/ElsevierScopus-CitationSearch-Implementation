@@ -208,9 +208,19 @@ public class Feature_2 {
 
        }
 
+       if(p == 0) // when the related pioneering list null then by default we will take 1 for preventing the error of NaN
+       {
+           p = 1;
+           double fe2 = (q*1.0)/p;
+           System.out.println("feature-2 :  +  " + fe2);
+       }
+       else
+       {
+           double fe2 = (q*1.0)/p;
+           System.out.println("feature-2 :  +  " + fe2);
+       }
 
-        double fe2 = (q*1.0)/p;
-        System.out.println("feature-2 :  +  " + fe2);
+
 
 
     }

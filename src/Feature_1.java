@@ -209,8 +209,20 @@ public class Feature_1 {
             }
         }
 
-        double fe1 = (m*1.0)/n;
-        System.out.println("feature-1  :  "+fe1);
+        if(n == 0) // when the related recent search list null then by default we will take 1 for preventing the error of NaN
+        {
+            n = 1;
+            double fe2 = (m*1.0)/n;
+            System.out.println("feature-1 :  +  " + fe2);
+        }
+        else
+        {
+            double fe2 = (m*1.0)/n;
+            System.out.println("feature-1 :  +  " + fe2);
+        }
+
+
+
 
     }
 }

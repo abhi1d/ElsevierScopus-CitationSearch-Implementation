@@ -63,8 +63,17 @@ public class Feature_3
         }
         counter1 = final_list.size();
         int counter2 = ref_list_from_intro.size();
-        System.out.println(counter1);
 
-        System.out.println("feature  3  :   " + ((counter1*1.0)/counter2) );
+        System.out.println(counter1);
+        if(counter2 == 0)//if array list from ref is null then it will give us NaN in the output so by default we will take 1 size
+        {
+            counter2 = 1;
+            System.out.println("feature  3  :   " + ((counter1*1.0)/counter2) );
+        }
+        else
+        {
+            System.out.println("feature  3  :   " + ((counter1*1.0)/counter2) );
+        }
+
     }
 }
