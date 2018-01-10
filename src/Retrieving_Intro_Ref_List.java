@@ -37,7 +37,10 @@ public class Retrieving_Intro_Ref_List {
                 Element el_head = (Element) node_head_type;
 
                 String type_of_head = "";
-
+                // here we are extracting the type(n) of the headings
+                // Because headings will start from 1.,2.,3. etc and sub headings will be like 1.1,2.3 etc
+                // when we get exact number then that will be main heading.
+                // So we will extract introduction part and when the 2nd heading comes then we will not count.
                 try{
                     type_of_head = el_head.getAttribute("n");
                 }catch (Exception e){
