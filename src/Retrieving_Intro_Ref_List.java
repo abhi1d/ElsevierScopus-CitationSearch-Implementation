@@ -1,3 +1,8 @@
+/*
+ * issue :1
+ *  Sometimes the range of references can be like 2-6 or 2~6 so here tilde sign. What should I do ?
+ */
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -112,7 +117,7 @@ public class Retrieving_Intro_Ref_List {
                             if (flag2 == 1) {
                                 flag2 = 0;
                                 System.out.println("heading : " + tag_name_head_content);
-                                fw.write("heading   :    " + tag_name_head_content + "\n");
+                                //fw.write("heading   :    " + tag_name_head_content + "\n");
                                 fw.close();
                             } else {
                                 //we are removing the last_co_ref from the number_of_ref
@@ -121,7 +126,7 @@ public class Retrieving_Intro_Ref_List {
                                 //and adding into the next immediate reference
 
 
-                                fw.write("ref   :   " + (number_of_ref - last_co_ref) + "\n");
+                                //fw.write("ref   :   " + (number_of_ref - last_co_ref) + "\n");
                                 System.out.println("ref : " + (number_of_ref - last_co_ref) + "\n");
                                 //System.out.println("total_no_ref " +total_no_ref);
                                 //Double feature = ((number_of_ref - last_co_ref) * (1.0) / numberOfAuthers);
@@ -198,9 +203,6 @@ public class Retrieving_Intro_Ref_List {
         }
 
 
-        /*for (String s : intro_ref_string_list) {
-            System.out.println(s);
-        }*/
      return intro_ref_string_list;
     }
 }

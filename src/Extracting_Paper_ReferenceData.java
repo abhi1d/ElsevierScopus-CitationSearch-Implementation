@@ -22,7 +22,7 @@ public class Extracting_Paper_ReferenceData {
     {
         try {
             // here we can change the pathname according our choice
-            File inputFile = new File("/home/abhi/eclipse-oxygen/INS_CleanUpdate/XML/INS_ACC/INS-D-13-1234[1]_cleaned.pdf.xml" + str.trim());
+            File inputFile = new File(str.trim());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

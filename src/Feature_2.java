@@ -14,7 +14,7 @@ public class Feature_2 {
     public int q = 0;
 
 
-    public void Get_Feature_2(String title,int total_related_search){
+    public void Get_Feature_2(String title,int total_related_search, String pathname){
 
         //String title = "Fault-tolerant+edge-bipancyclicity+of+faulty+hypercubes+under+the+conditional-fault+model";
          String apiKey = "288b2ca0b06c75c02c0ec188e6226d3e";
@@ -80,7 +80,7 @@ public class Feature_2 {
 
                    Extracting_Paper_ReferenceData obj_referenceList = new Extracting_Paper_ReferenceData();
                    // here we are passing the null string because for the testing purpose it already associated in Extracting_paper_reference Class
-                   Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List("");
+                   Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List(pathname);
 
 
                    for(String s : pioneering_work_paper)
@@ -172,7 +172,7 @@ public class Feature_2 {
 
                    Extracting_Paper_ReferenceData obj_referenceList = new Extracting_Paper_ReferenceData();
                    // here we are passing the null string because for the testing purpose it already associated in Extracting_paper_reference Class
-                   Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List("");
+                   Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List(pathname);
 
 
                    for(String s : pioneering_work_paper)
@@ -196,6 +196,8 @@ public class Feature_2 {
 
                    //resultBySearching = Integer.parseInt(result);
                    total_related_search = -1;
+
+
                }
                catch(Exception e)
                {
@@ -203,10 +205,12 @@ public class Feature_2 {
                    System.out.println("Problem occured during total searching result extraction");
                }
            }
+
        }
 
 
-
+        double fe2 = (q*1.0)/p;
+        System.out.println("feature-2 :  +  " + fe2);
 
 
     }

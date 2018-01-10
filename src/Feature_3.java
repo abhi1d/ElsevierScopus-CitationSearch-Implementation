@@ -56,14 +56,14 @@ public class Feature_3
         hs.addAll(final_list);
         final_list.clear();
         final_list.addAll(hs);
-
+        System.out.print("final list after removing the duplicates  : ");
         for(String str : final_list)
         {
             System.out.println(str);
         }
         counter1 = final_list.size();
         int counter2 = ref_list_from_intro.size();
-        System.out.println("final list after removing the duplicates  : "+counter1);
+        System.out.println(counter1);
 
         System.out.println("feature  3  :   " + ((counter1*1.0)/counter2) );
     }

@@ -12,7 +12,7 @@ import java.util.Map;
 public class Feature_1 {
     public  int n = 0;
     public  int m = 0;
-    public void Get_Feature_1(String title,int total_related_search){
+    public void Get_Feature_1(String title,int total_related_search, String pathname){
 
         //String title = "Computational analysis of microarray data using Löwdin orthognalizations";
         String apiKey = "288b2ca0b06c75c02c0ec188e6226d3e";
@@ -70,14 +70,14 @@ public class Feature_1 {
                         String year_paper = obj_counter.getString("prism:coverDate");
                         int year_of_paper = Integer.parseInt(year_paper.substring(0,4));
                         int year = Calendar.getInstance().get(Calendar.YEAR);
-                        //if((year_of_paper+5) >= year)
-                        //{
+                        if((year_of_paper+5) >= year)
+                        {
                         String paper_search_counter  = obj_counter.getString("dc:title");
                         System.out.println(year_of_paper + " : " + paper_search_counter);
 
                         related_papers.add(paper_search_counter);
                         n++;
-                        //}
+                        }
 
                         i++;
                     }
@@ -85,7 +85,7 @@ public class Feature_1 {
                     System.out.println("\n\n\t\t------paper extracted : " + paper_extracted +"------\n");
                     Extracting_Paper_ReferenceData obj_referenceList = new Extracting_Paper_ReferenceData();
                     // here we are passing the null string because for the testing purpose it already associated in Extracting_paper_reference Class
-                    Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List("");
+                    Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List(pathname);
 
 
                     System.out.println("\n\n\n\t\t -----------Matched-----------\n\n\n");
@@ -176,7 +176,7 @@ public class Feature_1 {
 
                     Extracting_Paper_ReferenceData obj_referenceList = new Extracting_Paper_ReferenceData();
                     // here we are passing the null string because for the testing purpose it already associated in Extracting_paper_reference Class
-                    Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List("");
+                    Map<String, Integer> mapping = obj_referenceList.Get_Reference_Mapping_List(pathname);
 
 
 
@@ -209,7 +209,8 @@ public class Feature_1 {
             }
         }
 
-
+        double fe1 = (m*1.0)/n;
+        System.out.println("feature-1  :  "+fe1);
 
     }
 }
